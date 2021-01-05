@@ -2,7 +2,12 @@ class BooksController < ApplicationController
 
     def index
         books = Book.all
-        render json: BookSerializer.new(books).to_serialized_json
+        render json: books
+    end
+
+    def show
+        book = Book.find_by(id: params[:id])
+        render json: book
     end
 
 end

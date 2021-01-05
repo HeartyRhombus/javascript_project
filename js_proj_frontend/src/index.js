@@ -1,12 +1,14 @@
 const BASE_URL = 'http://localhost:3000';
 
 window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('books-home').addEventListener('click', getBooks)
     getBooks()
 })
 
-// index view
+// books index view
 function getBooks(){
     let main = document.getElementById('main')
+    main.innerHTML = ""
     fetch(BASE_URL + '/books')
         .then (resp => resp.json())
         .then (books => {
@@ -28,7 +30,7 @@ function addClicksToLinks() {
     })
 }
 
-// show view
+// book show view
 function showBook(e){
     let id = e.target.dataset.id
     let main = document.getElementById('main')

@@ -10,8 +10,6 @@ function getBooks(){
     fetch(BASE_URL + '/books')
         .then (resp => resp.json())
         .then (books => {
-            // do things to data here
-            // console.log(books)
             books.map(book => {
                 main.innerHTML += `
                 <li>
@@ -23,6 +21,10 @@ function getBooks(){
         })
 }
 
-function addClicksToLinks(e) {
-    console.log(e)
+function addClicksToLinks() {
+    let books = document.querySelectorAll("li a")
+    books.forEach(book => {
+        book.addEventListener('click', showBook)
+    })
 }
+

@@ -28,3 +28,27 @@ function addClicksToLinks() {
     })
 }
 
+// show view
+function showBook(e){
+    let id = e.target.dataset.id
+    let main = document.getElementById('main')
+    main.innerHTML = ""
+    fetch(BASE_URL + `/books/${id}`)
+        .then(resp => resp.json())
+        .then(book => {
+            main.innerHTML = `
+            <h3>${book.title}</h3>
+            By: ${book.author.first_name} ${book.author.last_name}
+            <hr>
+            Publication Date: ${book.pub_date}
+            <br>
+            Genre: ${book.genre}
+            <br>
+            Summary:
+            <br>
+            ${book.summary}            
+            `
+        })
+
+}
+

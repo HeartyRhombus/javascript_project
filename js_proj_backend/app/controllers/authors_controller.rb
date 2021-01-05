@@ -2,6 +2,11 @@ class AuthorsController < ApplicationController
 
     def index
         authors = Author.all
-        render json: authors, only: [:id, :first_name, :last_name]
+        render json: authors
+    end
+
+    def show
+        author = Author.find_by(id: params[:id])
+        render json: author
     end
 end

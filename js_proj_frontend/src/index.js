@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3000';
 
 window.addEventListener("DOMContentLoaded", () => {
     document.getElementById('books-form').addEventListener('click', createBookForm)
-    // document.getElementById('books-home').addEventListener('click', getBooks)
+    document.getElementById('books-home').addEventListener('click', getBooks)
     getBooks()
 })
 
@@ -55,10 +55,11 @@ function showBook(e){
 
 }
 
-// book create view
+// book create route
 function createBookForm(){
     let formDiv = document.getElementById("new-book-form")
     let html = `
+        Add A New Book
         <form>
             <label>Title: </label>
             <input type="text" id="title"/>
@@ -73,17 +74,48 @@ function createBookForm(){
             <input type="text" id="pub_date"/>
             <br>
             <label>Summary: </label>
-            <input type="text" id="summary"/>
+            <input type="textarea" id="summary"/>
             <br>
             <input type="submit"/>
         </form>
+        <br>
     `
     formDiv.innerHTML = html
     document.querySelector('form').addEventListener('submit', createBook)
 }
 
+// create route
 function createBook(e){
     e.preventDefault()
+    let book = {
+        title: e.target.querySelector("#title").value,
+        author: e.target.querySelector("#author").value,
+        genre: e.target.querySelector("#genre").value,
+        pub_date: e.target.querySelector("#pub_date").value,
+        summary: e.target.querySelector("#summary").value
+    }
+
+    let configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(book)
+    }
+    
+    fetch(BASE_URL + '/books', configObj)
+        .then(resp => resp.json())
+        .then(book => {
+            let main = document.getElementById('main')
+            main.innerHTML += `
+            <li>
+                <a href="#" data-id="#{book.id}">${book.title}</a>
+            </li>
+            `
+            addClicksToLinks()
+            clearForm()
+        })
 }
 
 function clearForm(){

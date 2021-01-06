@@ -1,4 +1,5 @@
 class AuthorsController < ApplicationController
+    
 
     def index
         authors = Author.all
@@ -8,6 +9,17 @@ class AuthorsController < ApplicationController
     def show
         author = Author.find_by(id: params[:id])
         render json: author
+    end
+
+      # POST /authors
+    def create
+        @author = Author.create_or_find_by(author_params)
+
+        if @author.save
+        render json: @author, status: :created, location: @author
+        else
+        render json: @author.errors, status: :unprocessable_entity
+        end
     end
 
     private

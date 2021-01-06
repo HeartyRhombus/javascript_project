@@ -1,15 +1,15 @@
 class BooksController < ApplicationController
+    before_action :set_book, only: [:show, :update, :destroy]
 
     # GET /books
     def index
-        books = Book.all
-        render json: books
+        @books = Book.all
+        render json: @books
     end
 
     # GET /books/1
     def show
-        book = Book.find_by(id: params[:id])
-        render json: book
+        render json: @book
     end
 
     # POST /books

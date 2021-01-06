@@ -44,11 +44,11 @@ function showBook(e){
             By: ${book.author.first_name} ${book.author.last_name}
             <hr>
             Publication Date: ${book.pub_date}
-            <br>
+            <br/>
             Genre: ${book.genre}
-            <br>
+            <br/>
             Summary:
-            <br>
+            <br/>
             ${book.summary}            
             `
         })
@@ -63,24 +63,41 @@ function createBookForm(){
         <form>
             <label>Title: </label>
             <input type="text" id="title"/>
-            <br>
+            <br/>
             <label>Author: </label>
-            <input type="text" id="author"/>
-            <br>
+            <select name="authors" id="author">
+                <option value="">--Please Select an Author--</option>
+                <option value="new_author">Add an Author</option>
+            </select>
+            <input type="text" id="new_author" placeholder="New Author"/>
+            <br/>
             <label>Genre: </label>
             <input type="text" id="genre"/>
-            <br>
+            <br/>
             <label>Publication Date: </label>
             <input type="date" id="pub_date"/>
-            <br>
+            <br/>
             <label>Summary: </label>
             <input type="textarea" id="summary"/>
-            <br>
+            <br/>
             <input type="submit"/>
         </form>
-        <br>
+        <br/>
     `
     formDiv.innerHTML = html
+    fetch(BASE_URL + '/authors')
+        .then(resp => resp.json())
+        .then(authors => {
+            authors.forEach(author => {
+                let formSelectOptions = document.querySelector('form select')
+                formSelectOptions.innerHTML += `
+                    <option value="${author.first_name} ${author.last_name}">
+                        ${author.first_name} ${author.last_name}
+                    </option>
+                `
+            })
+        })
+
     document.querySelector('form').addEventListener('submit', createBook)
 }
 

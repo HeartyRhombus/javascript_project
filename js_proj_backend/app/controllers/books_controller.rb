@@ -32,6 +32,11 @@ class BooksController < ApplicationController
         end
     end
 
+    # DELETE /books/1
+    def destroy
+        @book.destroy
+    end
+
     private
         # Use callbacks to share common setup or constraints between actions.
         def set_book

@@ -23,13 +23,18 @@ class AuthorsController < ApplicationController
     end
 
       # PATCH/PUT /authors/1
-  def update
-    if @author.update(author_params)
-      render json: @author
-    else
-      render json: @author.errors, status: :unprocessable_entity
+    def update
+        if @author.update(author_params)
+        render json: @author
+        else
+        render json: @author.errors, status: :unprocessable_entity
+        end
     end
-  end
+
+    # DELETE /authors/1
+    def destroy
+        @author.destroy
+    end
 
     private
     # Use callbacks to share common setup or constraints between actions.

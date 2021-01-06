@@ -113,7 +113,7 @@ function createBook(e){
     }
 
     if (e.target.querySelector("#author").value === "new_author"){
-        book.author = {
+        book.author_attributes = {
             first_name: e.target.querySelector("#new_author").value.split(" ")[0],
             last_name: e.target.querySelector("#new_author").value.split(" ")[1],
             }
@@ -136,7 +136,7 @@ function createBook(e){
             let main = document.getElementById('main')
             main.innerHTML += `
             <li>
-                <a href="#" data-id="#{book.id}">${book.title}</a>
+                <a href="#" data-id="${book.id}">${book.title}</a>
             </li>
             `
             addClicksToLinks()

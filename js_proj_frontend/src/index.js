@@ -91,7 +91,7 @@ function createBookForm(){
             authors.forEach(author => {
                 let formSelectOptions = document.querySelector('form select')
                 formSelectOptions.innerHTML += `
-                    <option value="${author.first_name} ${author.last_name}">
+                    <option value="${author.id}">
                         ${author.first_name} ${author.last_name}
                     </option>
                 `
@@ -107,13 +107,18 @@ function createBook(e){
     // console.log(e)
     let book = {
         title: e.target.querySelector("#title").value,
-        author: {
-            first_name: e.target.querySelector("#author").value.split(" ")[0],
-            last_name: e.target.querySelector("#author").value.split(" ")[1],
-        },
         genre: e.target.querySelector("#genre").value,
         pub_date: e.target.querySelector("#pub_date").value,
         summary: e.target.querySelector("#summary").value
+    }
+
+    if (e.target.querySelector("#author").value === "new_author"){
+        book.author = {
+            first_name: e.target.querySelector("#new_author").value.split(" ")[0],
+            last_name: e.target.querySelector("#new_author").value.split(" ")[1],
+            }
+    } else {
+        book.author_id = e.target.querySelector("#author").value
     }
 
     let configObj = {

@@ -22,6 +22,15 @@ class AuthorsController < ApplicationController
         end
     end
 
+      # PATCH/PUT /authors/1
+  def update
+    if @author.update(author_params)
+      render json: @author
+    else
+      render json: @author.errors, status: :unprocessable_entity
+    end
+  end
+
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_author

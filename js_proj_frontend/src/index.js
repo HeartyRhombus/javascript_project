@@ -71,7 +71,7 @@ function createBookForm(){
             <input type="text" id="genre"/>
             <br>
             <label>Publication Date: </label>
-            <input type="text" id="pub_date"/>
+            <input type="date" id="pub_date"/>
             <br>
             <label>Summary: </label>
             <input type="textarea" id="summary"/>
@@ -87,9 +87,13 @@ function createBookForm(){
 // create route
 function createBook(e){
     e.preventDefault()
+    // console.log(e)
     let book = {
         title: e.target.querySelector("#title").value,
-        author: e.target.querySelector("#author").value,
+        author: {
+            first_name: e.target.querySelector("#author").value.split(" ")[0],
+            last_name: e.target.querySelector("#author").value.split(" ")[1],
+        },
         genre: e.target.querySelector("#genre").value,
         pub_date: e.target.querySelector("#pub_date").value,
         summary: e.target.querySelector("#summary").value

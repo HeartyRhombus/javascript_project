@@ -1,7 +1,8 @@
 const BASE_URL = 'http://localhost:3000';
 
 window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('books-home').addEventListener('click', getBooks)
+    document.getElementById('books-form').addEventListener('click', createBookForm)
+    // document.getElementById('books-home').addEventListener('click', getBooks)
     getBooks()
 })
 
@@ -54,3 +55,38 @@ function showBook(e){
 
 }
 
+// book create view
+function createBookForm(){
+    let formDiv = document.getElementById("new-book-form")
+    let html = `
+        <form>
+            <label>Title: </label>
+            <input type="text" id="title"/>
+            <br>
+            <label>Author: </label>
+            <input type="text" id="author"/>
+            <br>
+            <label>Genre: </label>
+            <input type="text" id="genre"/>
+            <br>
+            <label>Publication Date: </label>
+            <input type="text" id="pub_date"/>
+            <br>
+            <label>Summary: </label>
+            <input type="text" id="summary"/>
+            <br>
+            <input type="submit"/>
+        </form>
+    `
+    formDiv.innerHTML = html
+    document.querySelector('form').addEventListener('submit', createBook)
+}
+
+function createBook(e){
+    e.preventDefault()
+}
+
+function clearForm(){
+    let formDiv = document.getElementById("new-book-form")
+    formDiv.innerHTML = ""
+}

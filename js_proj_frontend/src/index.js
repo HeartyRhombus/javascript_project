@@ -86,7 +86,8 @@ function createBookForm(){
             <input type="date" id="pub_date"/>
             <br/>
             <label>Summary: </label>
-            <input type="textarea" id="summary"/>
+            <br/>
+            <textarea id="summary" rows="8" cols="50"></textarea>
             <br/>
             <input type="submit"/>
         </form>
@@ -199,7 +200,8 @@ function editBookForm(e){
                     <input type="date" id="pub_date" value="${book.pub_date}"/>
                     <br/>
                     <label>Summary: </label>
-                    <input type="textarea" id="summary" value="${book.summary}"/>
+                    <br/>
+                    <textarea id="summary" rows="8" cols="50">${book.summary}</textarea>
                     <br/>
                     <input type="submit"/>
                 </form>
@@ -218,7 +220,7 @@ function editBookForm(e){
 
                 let sel = document.querySelector('form select')
                 let opts = sel.options
-                for (var opt, i = 0; opt = opts[i]; i++
+                for (let opt, i = 0; opt = opts[i]; i++
                     ){
                     if (opt.id == book.author.id){
                         sel.selectedIndex = i

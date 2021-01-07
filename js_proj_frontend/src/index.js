@@ -55,7 +55,7 @@ function showBook(e){
             <button id="edit_book" data-id="${book.id}">Edit</button>
             <button id="delete_book" data-id="${book.id}">Delete</button>
             `
-            
+            document.getElementById('edit_book').addEventListener('click', editBookForm)
             document.getElementById('delete_book').addEventListener('click', deleteBook)
         })
 
@@ -169,4 +169,57 @@ function deleteBook(e){
     }
     fetch(BASE_URL + `/books/${e.target.dataset.id}`, configObj)
     .then(getBooks())
+}
+
+function editBookForm(e){
+    console.log('You have reached the editBookForm method!')
+    let main = document.getElementById('main')
+    main.innerHtml = ""
+    fetch(BASE_URL + `/books/${e.target.dataset.id}`)
+        .then(resp => resp.json())
+        .then(book => {
+            main.innerHTML = `
+                Edit ${book.title}:
+                <br/>
+                <form>
+                    <label>Title: </label>
+                    <input type="text" id="title" value="${book.title}"/>
+                    <br/>
+                    <label>Author: </label>
+                    <select name="authors" id="author">
+                        <option value="">--Please Select an Author--</option>
+                        <option value="new_author">Add an Author</option>
+                    </select>
+                    <input type="text" id="new_author" placeholder="New Author"/>
+                    <br/>
+                    <label>Genre: </label>
+                    <input type="text" id="genre" value="${book.genre}"/>
+                    <br/>
+                    <label>Publication Date: </label>
+                    <input type="date" id="pub_date" value="${book.pub_date}"/>
+                    <br/>
+                    <label>Summary: </label>
+                    <input type="textarea" id="summary" value="${book.summary}"/>
+                    <br/>
+                    <input type="submit"/>
+                </form>
+            `
+        })
+    fetch(BASE_URL + '/authors')
+    .then(resp => resp.json())
+    .then(authors => {
+        authors.forEach(author => {
+            let formSelectOptions = document.querySelector('form select')
+            formSelectOptions.innerHTML += `
+                <option value="${author.id}">
+                    ${author.first_name} ${author.last_name}
+                </option>
+            `
+        })
+    })
+}
+
+function updateBook(e){
+    let id = e.target.dataset.id
+    let main = document.getElementById('main')
 }

@@ -204,19 +204,28 @@ function editBookForm(e){
                     <input type="submit"/>
                 </form>
             `
+            fetch(BASE_URL + '/authors')
+            .then(resp => resp.json())
+            .then(authors => {
+                authors.forEach(author => {
+                    let formSelectOptions = document.querySelector('form select')
+                    formSelectOptions.innerHTML += `
+                        <option value="${author.id}" id="${author.id}">
+                            ${author.first_name} ${author.last_name}
+                        </option>
+                    `
+                })
+
+                let sel = document.querySelector('form select')
+                let opts = sel.options
+                for (var opt, i = 0; opt = opts[i]; i++
+                    ){
+                    if (opt.id == book.author.id){
+                        sel.selectedIndex = i
+                    }
+                }
+            })
         })
-    fetch(BASE_URL + '/authors')
-    .then(resp => resp.json())
-    .then(authors => {
-        authors.forEach(author => {
-            let formSelectOptions = document.querySelector('form select')
-            formSelectOptions.innerHTML += `
-                <option value="${author.id}">
-                    ${author.first_name} ${author.last_name}
-                </option>
-            `
-        })
-    })
 }
 
 function updateBook(e){

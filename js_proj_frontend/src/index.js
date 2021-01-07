@@ -173,7 +173,6 @@ function deleteBook(e){
 }
 
 function editBookForm(e){
-    console.log('You have reached the editBookForm method!')
     let main = document.getElementById('main')
     main.innerHtml = ""
     fetch(BASE_URL + `/books/${e.target.dataset.id}`)
@@ -183,6 +182,7 @@ function editBookForm(e){
                 Edit ${book.title}:
                 <br/>
                 <form>
+                    <input type="hidden" id="${book.id}">
                     <label>Title: </label>
                     <input type="text" id="title" value="${book.title}"/>
                     <br/>
@@ -227,10 +227,40 @@ function editBookForm(e){
                     }
                 }
             })
+            document.querySelector('form').addEventListener('submit', updateBook)
         })
 }
 
 function updateBook(e){
-    let id = e.target.dataset.id
+    e.preventDefault()
+    let id = e.target.querySelector('form input').id
     let main = document.getElementById('main')
+    let book = {
+        title: e.target.querySelector("#title").value,
+        genre: e.target.querySelector("#genre").value,
+        pub_date: e.target.querySelector("#pub_date").value,
+        summary: e.target.querySelector("#summary").value
+    }
+
+    if (e.target.querySelector("#author").value === "new_author"){
+        book.author_attributes = {
+            first_name: e.target.querySelector("#new_author").value.split(" ")[0],
+            last_name: e.target.querySelector("#new_author").value.split(" ")[1],
+            }
+    } else {
+        book.author_id = e.target.querySelector("#author").value
+    }
+
+    let configObj = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(book)
+    }
+    
+    fetch(BASE_URL + `/books/${id}`, configObj)
+        .then(resp => resp.json())
+        .then(book => showBook)
 }

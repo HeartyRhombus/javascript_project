@@ -49,7 +49,11 @@ function showBook(e){
             <br/>
             Summary:
             <br/>
-            ${book.summary}            
+            ${book.summary}
+            <br/>
+            <hr>
+            <button id="edit_book" data-id="${book.id}">Edit</button>
+            <button id="delete_book" data-id="${book.id}">Delete</button>
             `
         })
 
@@ -101,7 +105,6 @@ function createBookForm(){
     document.querySelector('form').addEventListener('submit', createBook)
 }
 
-// create route
 function createBook(e){
     e.preventDefault()
     // console.log(e)

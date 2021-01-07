@@ -55,6 +55,8 @@ function showBook(e){
             <button id="edit_book" data-id="${book.id}">Edit</button>
             <button id="delete_book" data-id="${book.id}">Delete</button>
             `
+            
+            document.getElementById('delete_book').addEventListener('click', deleteBook)
         })
 
 }
@@ -154,4 +156,17 @@ function createBook(e){
 function clearForm(){
     let formDiv = document.getElementById("new-book-form")
     formDiv.innerHTML = ""
+}
+
+function deleteBook(e){
+    console.log(e.target)
+    let configObj = {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }
+    fetch(BASE_URL + `/books/${e.target.dataset.id}`, configObj)
+    .then(getBooks())
 }

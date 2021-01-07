@@ -63,6 +63,8 @@ function showBook(e){
 function createBookForm(){
     let formDiv = document.getElementById("new-book-form")
     let html = `
+    <button id="cancel_add_book">Cancel</button>
+    <br/> <br/>
         Add A New Book
         <form>
             <label>Title: </label>
@@ -87,6 +89,7 @@ function createBookForm(){
             <input type="submit"/>
         </form>
         <br/>
+
     `
     formDiv.innerHTML = html
     fetch(BASE_URL + '/authors')
@@ -103,6 +106,7 @@ function createBookForm(){
         })
 
     document.querySelector('form').addEventListener('submit', createBook)
+    document.getElementById('cancel_add_book').addEventListener('click', clearForm)
 }
 
 function createBook(e){

@@ -40,7 +40,7 @@ async function showBook(e){
     document.getElementById('delete_book').addEventListener('click', deleteBook)
 }
 
-function createBookForm(){
+async function createBookForm(){
     let formDiv = document.getElementById("new-book-form")
     let html = `
     <button id="cancel_add_book">Cancel</button>
@@ -73,18 +73,12 @@ function createBookForm(){
 
     `
     formDiv.innerHTML = html
-    fetch("http://localhost:3000" + '/authors')
-        .then(resp => resp.json())
-        .then(authors => {
-            authors.forEach(author => {
-                let formSelectOptions = document.querySelector('form select')
-                formSelectOptions.innerHTML += `
-                    <option value="${author.id}">
-                        ${author.first_name} ${author.last_name}
-                    </option>
-                `
-            })
-        })
+    let formSelectOptions = document.querySelector('form select')
+    const authors = await apiService.fetchAllAuthors()
+    authors.forEach( author => {
+        const newAuthor = new Author(author)
+        formSelectOptions.innerHTML += newAuthor.authorSelectOptions()
+    })
 
     document.querySelector('form').addEventListener('submit', createBook)
     document.getElementById('cancel_add_book').addEventListener('click', clearForm)
@@ -127,63 +121,26 @@ async function deleteBook(e){
     renderBooks()
 }
 
-function editBookForm(e){
-    let main = document.getElementById('main')
+async function editBookForm(e){
+    let id = e.target.dataset.id
     main.innerHtml = ""
-    fetch(BASE_URL + `/books/${e.target.dataset.id}`)
-        .then(resp => resp.json())
-        .then(book => {
-            main.innerHTML = `
-                Edit ${book.title}:
-                <br/>
-                <form>
-                    <input type="hidden" id="${book.id}">
-                    <label>Title: </label>
-                    <input type="text" id="title" value="${book.title}"/>
-                    <br/>
-                    <label>Author: </label>
-                    <select name="authors" id="author">
-                        <option value="">--Please Select an Author--</option>
-                        <option value="new_author">Add an Author</option>
-                    </select>
-                    <input type="text" id="new_author" placeholder="New Author"/>
-                    <br/>
-                    <label>Genre: </label>
-                    <input type="text" id="genre" value="${book.genre}"/>
-                    <br/>
-                    <label>Publication Date: </label>
-                    <input type="date" id="pub_date" value="${book.pub_date}"/>
-                    <br/>
-                    <label>Summary: </label>
-                    <br/>
-                    <textarea id="summary" rows="8" cols="50">${book.summary}</textarea>
-                    <br/>
-                    <input type="submit"/>
-                </form>
-            `
-            fetch(BASE_URL + '/authors')
-            .then(resp => resp.json())
-            .then(authors => {
-                authors.forEach(author => {
-                    let formSelectOptions = document.querySelector('form select')
-                    formSelectOptions.innerHTML += `
-                        <option value="${author.id}" id="${author.id}">
-                            ${author.first_name} ${author.last_name}
-                        </option>
-                    `
-                })
-
-                let sel = document.querySelector('form select')
-                let opts = sel.options
-                for (let opt, i = 0; opt = opts[i]; i++
-                    ){
-                    if (opt.id == book.author.id){
-                        sel.selectedIndex = i
-                    }
-                }
+    const book = await apiService.fetchBook(id)
+    const editBook = new Book(book)
+    main.innerHTML = editBook.renderEditBookForm()
+    let formSelectOptions = document.querySelector('form select')
+    const authors = await apiService.fetchAllAuthors()
+    authors.forEach( author => {
+        const newAuthor = new Author(author)
+        formSelectOptions.innerHTML += newAuthor.authorSelectOptions()
             })
-            document.querySelector('form').addEventListener('submit', updateBook)
-        })
+    let sel = document.querySelector('form select')
+    let opts = sel.options
+    for (let opt, i = 0; opt = opts[i]; i++){
+        if (opt.id == book.author.id){
+            sel.selectedIndex = i
+            }
+        }
+    document.querySelector('form').addEventListener('submit', updateBook)
 }
 
 function updateBook(e){

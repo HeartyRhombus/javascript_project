@@ -39,4 +39,10 @@ class ApiService {
         let book = await resp.json()
         return book
     }
+
+    async fetchAllAuthors(){
+        let resp = await fetch(this.baseURL +'/authors')
+        let authors = await resp.json()
+        return authors
+    }
 }

@@ -5,8 +5,8 @@ class ApiService {
 
     async fetchBooks(){
         let resp = await fetch(this.baseURL + '/books')
-        let data = await resp.json()
-        return data
+        let books = await resp.json()
+        return books
     }
 
     async fetchBook(id){
@@ -26,4 +26,17 @@ class ApiService {
         await fetch(this.baseURL + `/books/${id}`, configObj)
     }
 
+    async postBook(bookData){
+        let configObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(bookData)
+        }
+        let resp = await fetch(this.baseURL + `/books`, configObj)
+        let book = await resp.json()
+        return book
+    }
 }

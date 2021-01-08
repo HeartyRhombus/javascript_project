@@ -262,5 +262,5 @@ function updateBook(e){
     
     fetch(BASE_URL + `/books/${id}`, configObj)
         .then(resp => resp.json())
-        .then(book => showBook)
+        .then(getBooks())
 }

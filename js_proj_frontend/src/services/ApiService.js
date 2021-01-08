@@ -40,6 +40,20 @@ class ApiService {
         return book
     }
 
+    async patchBook(id, bookData){
+        let configObj = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(bookData)
+        }
+        let resp = await fetch(this.baseURL + `/books/${id}`, configObj)
+        let data = resp.json()
+        return data
+    }
+
     async fetchAllAuthors(){
         let resp = await fetch(this.baseURL +'/authors')
         let authors = await resp.json()

@@ -9,4 +9,10 @@ class ApiService {
         return data
     }
 
+    async fetchBook(id){
+        let resp = await fetch(this.baseURL + `/books/${id}`)
+        let book = await resp.json()
+        return book
+    }
+
 }

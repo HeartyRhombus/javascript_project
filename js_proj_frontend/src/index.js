@@ -17,6 +17,7 @@ async function renderBooks(){
     books.map(book => {
         const newBook = new Book(book)
         main.innerHTML += newBook.renderBook()
+        addClicksToLinks()
     })
 
 }
@@ -28,37 +29,17 @@ function addClicksToLinks() {
     })
 }
 
-// book show view
-function showBook(e){
-    let id = e.target.dataset.id
-    let main = document.getElementById('main')
-    main.innerHTML = ""
-    fetch(BASE_URL + `/books/${id}`)
-        .then(resp => resp.json())
-        .then(book => {
-            main.innerHTML = `
-            <h3>${book.title}</h3>
-            By: ${book.author.first_name} ${book.author.last_name}
-            <hr>
-            Publication Date: ${book.pub_date}
-            <br/>
-            Genre: ${book.genre}
-            <br/>
-            Summary:
-            <br/>
-            ${book.summary}
-            <br/>
-            <hr>
-            <button id="edit_book" data-id="${book.id}">Edit</button>
-            <button id="delete_book" data-id="${book.id}">Delete</button>
-            `
-            document.getElementById('edit_book').addEventListener('click', editBookForm)
-            document.getElementById('delete_book').addEventListener('click', deleteBook)
-        })
 
+async function showBook(e){
+    let id = e.target.dataset.id
+    const book = await apiService.fetchBook(id)
+    main.innerHTML = ""
+    const viewBook = new Book(book)
+    main.innerHTML = viewBook.displayBook()
+    document.getElementById('edit_book').addEventListener('click', editBookForm)
+    document.getElementById('delete_book').addEventListener('click', deleteBook)
 }
 
-// book create route
 function createBookForm(){
     let formDiv = document.getElementById("new-book-form")
     let html = `

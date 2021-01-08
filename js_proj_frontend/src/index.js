@@ -1,27 +1,24 @@
-const BASE_URL = 'http://localhost:3000';
+const apiService = new ApiService()
+let main = document.getElementById('main')
 
-window.addEventListener("DOMContentLoaded", () => {
+const init = () => {
+    addEventListeners()
+    renderBooks()
+}
+
+function addEventListeners(){
     document.getElementById('books-form').addEventListener('click', createBookForm)
-    document.getElementById('books-home').addEventListener('click', getBooks)
-    getBooks()
-})
+    document.getElementById('books-home').addEventListener('click', renderBooks)
+}
 
-// books index view
-function getBooks(){
-    let main = document.getElementById('main')
+async function renderBooks(){
+    const books = await apiService.fetchBooks()
     main.innerHTML = ""
-    fetch(BASE_URL + '/books')
-        .then (resp => resp.json())
-        .then (books => {
-            books.map(book => {
-                main.innerHTML += `
-                <li>
-                    <a href="#" data-id="${book.id}">${book.title}</a>
-                </li>
-                `
-            })
-            addClicksToLinks()
-        })
+    books.map(book => {
+        const newBook = new Book(book)
+        main.innerHTML += newBook.renderBook()
+    })
+
 }
 
 function addClicksToLinks() {
@@ -264,3 +261,6 @@ function updateBook(e){
         .then(resp => resp.json())
         .then(getBooks())
 }
+
+
+init()

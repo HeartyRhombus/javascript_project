@@ -36,4 +36,35 @@ class Book{
         `
     }
 
+    renderEditBookForm(){
+        return `
+        Edit ${this.title}:
+        <br/>
+        <form>
+            <input type="hidden" id="${this.id}">
+            <label>Title: </label>
+            <input type="text" id="title" value="${this.title}"/>
+            <br/>
+            <label>Author: </label>
+            <select name="authors" id="author">
+                <option value="">--Please Select an Author--</option>
+                <option value="new_author">Add an Author</option>
+            </select>
+            <input type="text" id="new_author" placeholder="New Author"/>
+            <br/>
+            <label>Genre: </label>
+            <input type="text" id="genre" value="${this.genre}"/>
+            <br/>
+            <label>Publication Date: </label>
+            <input type="date" id="pub_date" value="${this.pub_date}"/>
+            <br/>
+            <label>Summary: </label>
+            <br/>
+            <textarea id="summary" rows="8" cols="50">${this.summary}</textarea>
+            <br/>
+            <input type="submit"/>
+        </form>
+    `
+    }
+
 }

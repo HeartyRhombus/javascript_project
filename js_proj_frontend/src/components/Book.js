@@ -17,7 +17,7 @@ class Book{
         `
     }
 
-    displayBook(book){
+    displayBook(){
         return `
         <h3>${this.title}</h3>
         By: ${this.author.first_name} ${this.author.last_name}

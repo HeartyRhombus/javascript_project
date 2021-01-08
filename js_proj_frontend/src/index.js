@@ -29,7 +29,6 @@ function addClicksToLinks() {
     })
 }
 
-
 async function showBook(e){
     let id = e.target.dataset.id
     main.innerHTML = ""

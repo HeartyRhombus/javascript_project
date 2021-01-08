@@ -137,17 +137,10 @@ function clearForm(){
     formDiv.innerHTML = ""
 }
 
-function deleteBook(e){
-    console.log(e.target)
-    let configObj = {
-        method: "DELETE",
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    }
-    fetch(BASE_URL + `/books/${e.target.dataset.id}`, configObj)
-    .then(getBooks())
+async function deleteBook(e){
+    let id = e.target.dataset.id
+    await apiService.deleteBook(id)
+    renderBooks()
 }
 
 function editBookForm(e){

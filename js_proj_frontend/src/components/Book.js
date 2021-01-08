@@ -8,4 +8,12 @@ class Book{
         this.author = data.author
     }
 
+    renderBook(){
+        return `
+        <li>
+            <a href="#" data-id="${this.id}">${this.title}</a>
+        </li>
+        `
+    }
+
 }

@@ -17,8 +17,8 @@ async function renderBooks(){
     books.map(book => {
         const newBook = new Book(book)
         main.innerHTML += newBook.renderBook()
-        addClicksToLinks()
     })
+    addClicksToLinks()
 
 }
 
@@ -32,8 +32,8 @@ function addClicksToLinks() {
 
 async function showBook(e){
     let id = e.target.dataset.id
-    const book = await apiService.fetchBook(id)
     main.innerHTML = ""
+    const book = await apiService.fetchBook(id)
     const viewBook = new Book(book)
     main.innerHTML = viewBook.displayBook()
     document.getElementById('edit_book').addEventListener('click', editBookForm)
@@ -73,7 +73,7 @@ function createBookForm(){
 
     `
     formDiv.innerHTML = html
-    fetch(BASE_URL + '/authors')
+    fetch("http://localhost:3000" + '/authors')
         .then(resp => resp.json())
         .then(authors => {
             authors.forEach(author => {
@@ -90,9 +90,9 @@ function createBookForm(){
     document.getElementById('cancel_add_book').addEventListener('click', clearForm)
 }
 
-function createBook(e){
+async function createBook(e){
     e.preventDefault()
-    // console.log(e)
+    
     let book = {
         title: e.target.querySelector("#title").value,
         genre: e.target.querySelector("#genre").value,
@@ -109,27 +109,11 @@ function createBook(e){
         book.author_id = e.target.querySelector("#author").value
     }
 
-    let configObj = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(book)
-    }
-    
-    fetch(BASE_URL + '/books', configObj)
-        .then(resp => resp.json())
-        .then(book => {
-            let main = document.getElementById('main')
-            main.innerHTML += `
-            <li>
-                <a href="#" data-id="${book.id}">${book.title}</a>
-            </li>
-            `
-            addClicksToLinks()
-            clearForm()
-        })
+    let data = await apiService.postBook(book)
+    let newBook = new Book(data)
+    main.innerHTML += newBook.renderBook()
+    addClicksToLinks()
+    clearForm()
 }
 
 function clearForm(){

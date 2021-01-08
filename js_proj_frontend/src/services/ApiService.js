@@ -15,4 +15,15 @@ class ApiService {
         return book
     }
 
+    async deleteBook(id){
+        let configObj = {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+        await fetch(this.baseURL + `/books/${id}`, configObj)
+    }
+
 }

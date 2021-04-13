@@ -9,16 +9,29 @@ const init = () => {
 function addEventListeners(){
     document.getElementById('books-form').addEventListener('click', createBookForm)
     document.getElementById('books-home').addEventListener('click', renderBooks)
+    document.getElementById('jk_books').addEventListener('click', renderJkBooks)
 }
 
 async function renderBooks(){
     const books = await apiService.fetchBooks()
     main.innerHTML = ""
-    books.map(book => {
+    books.forEach(book => {
         const newBook = new Book(book)
         main.innerHTML += newBook.renderBook()
     })
     addClicksToLinks()
+}
+
+async function renderJkBooks(){
+    const books = await apiService.fetchBooks()
+    main.innerHTML = ""
+    let jkBooks = books.filter( book => book.author.first_name === "J.K.")
+    jkBooks.forEach( book => {
+        const newBook = new Book(book)
+        main.innerHTML += newBook.renderBook()
+    })
+    addClicksToLinks()
+        console.log(jkBooks)
 
 }
 

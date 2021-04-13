@@ -22,6 +22,16 @@ async function renderBooks(){
 
 }
 
+async function renderAuthors(){
+    const authors = await apiService.fetchAllAuthors()
+    main.innerHTML = ""
+    authors.map(author => {
+        const newAuthor = new Author(author)
+        main.innerHTML += newAuthor.renderAuthor()
+    })
+    addClicksToLinks()
+}
+
 function addClicksToLinks() {
     let books = document.querySelectorAll("li a")
     books.forEach(book => {

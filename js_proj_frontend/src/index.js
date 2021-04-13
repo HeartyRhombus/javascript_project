@@ -9,6 +9,7 @@ const init = () => {
 function addEventListeners(){
     document.getElementById('books-form').addEventListener('click', createBookForm)
     document.getElementById('books-home').addEventListener('click', renderBooks)
+    document.getElementById('authors-home').addEventListener('click', renderAuthors)
 }
 
 async function renderBooks(){

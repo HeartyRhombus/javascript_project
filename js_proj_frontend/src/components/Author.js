@@ -1,7 +1,18 @@
 class Author{
+
     constructor(data){
         this.first_name = data.first_name
         this.last_name = data.last_name
+    }
+
+    renderAuthor(){
+        return `
+        <li>
+            <a href="#" data-id="${this.id}>
+                ${this.last_name}, ${this.first_name}
+            </a>
+        </li>
+        `
     }
 
     authorSelectOptions(){

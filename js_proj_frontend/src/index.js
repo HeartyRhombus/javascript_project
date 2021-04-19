@@ -54,6 +54,14 @@ async function showBook(e){
     document.getElementById('delete_book').addEventListener('click', deleteBook)
 }
 
+async function showAuthor(e){
+    let id = e.target.dataset.id
+    main.innerHTML = ""
+    const author = await apiService.fetchAuthor(id)
+    const viewAuthor = new Author(author)
+    main.innerHTML = viewAuthor.displayAuthor()
+}
+
 async function createBookForm(){
     let formDiv = document.getElementById("new-book-form")
     let html = `

@@ -38,6 +38,10 @@ function addClicksToLinks() {
     books.forEach(book => {
         book.addEventListener('click', showBook)
     })
+    let authors = document.querySelectorAll("li a.authors")
+    authors.forEach(author => {
+        author.addEventListener('click', showAuthor)
+    })
 }
 
 async function showBook(e){

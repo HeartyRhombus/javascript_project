@@ -34,7 +34,7 @@ async function renderAuthors(){
 }
 
 function addClicksToLinks() {
-    let books = document.querySelectorAll("li a")
+    let books = document.querySelectorAll("li a.books")
     books.forEach(book => {
         book.addEventListener('click', showBook)
     })

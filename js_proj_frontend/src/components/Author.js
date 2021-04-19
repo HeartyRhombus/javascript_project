@@ -15,6 +15,15 @@ class Author{
         </li>
         `
     }
+
+    displayAuthor(){
+        return `
+        <h3>${this.first_name} ${this.last_name}</h3>
+        Books:
+        <hr>
+
+        `
+    }
     
     authorSelectOptions(){
         return `

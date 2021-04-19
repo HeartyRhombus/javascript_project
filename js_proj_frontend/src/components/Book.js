@@ -12,7 +12,7 @@ class Book{
     renderBook(){
         return `
         <li>
-            <a href="#" data-id="${this.id}">${this.title}</a>
+            <a href="#" class="books" data-id="${this.id}">${this.title}</a>
         </li>
         `
     }

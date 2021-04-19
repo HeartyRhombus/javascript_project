@@ -9,13 +9,13 @@ class Author{
     renderAuthor(){
         return `
         <li>
-            <a href="#" data-id="${this.id}">
+            <a href="#" class="authors" data-id="${this.id}">
                 ${this.last_name}, ${this.first_name}
             </a>
         </li>
         `
     }
-
+    
     authorSelectOptions(){
         return `
             <option value="${this.id}">

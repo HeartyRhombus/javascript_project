@@ -4,6 +4,7 @@ class Author{
         this.id = data.id
         this.first_name = data.first_name
         this.last_name = data.last_name
+        this.books = data.books
     }
 
     renderAuthor(){

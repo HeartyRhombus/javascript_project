@@ -20,9 +20,11 @@ class Author{
     displayAuthor(){
         return `
         <h3>${this.first_name} ${this.last_name}</h3>
+        Published: ${this.books.length} books in the library!
+        <hr>
         Books:
         <hr>
-
+        
         `
     }
     

@@ -21,7 +21,7 @@ class Author{
         const books = this.books.map(book => {
             return `
             <li>
-                <a href="#" class="books">${book.title}</a>
+                <a href="#" class="books" data-id="${book.id}">${book.title}</a>
             </li>
             `
         }).join('')

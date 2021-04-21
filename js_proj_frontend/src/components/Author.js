@@ -18,13 +18,22 @@ class Author{
     }
 
     displayAuthor(){
+        const books = this.books.map(book => {
+            return `
+            <li>
+                <a href="#" class="books">${book.title}</a>
+            </li>
+            `
+        }).join('')
+        
         return `
         <h3>${this.first_name} ${this.last_name}</h3>
         Published: ${this.books.length} books in the library!
         <hr>
         Books:
-        <hr>
-        
+        <ul>
+            ${books}
+        </ul>
         `
     }
     

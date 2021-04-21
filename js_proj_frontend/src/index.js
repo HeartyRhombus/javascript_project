@@ -52,6 +52,7 @@ async function showBook(e){
     main.innerHTML = viewBook.displayBook()
     document.getElementById('edit_book').addEventListener('click', editBookForm)
     document.getElementById('delete_book').addEventListener('click', deleteBook)
+    addClicksToLinks()
 }
 
 async function showAuthor(e){
@@ -60,6 +61,7 @@ async function showAuthor(e){
     const author = await apiService.fetchAuthor(id)
     const viewAuthor = new Author(author)
     main.innerHTML = viewAuthor.displayAuthor()
+    addClicksToLinks()
 }
 
 async function createBookForm(){

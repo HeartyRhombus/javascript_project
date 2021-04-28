@@ -14,8 +14,19 @@ function addEventListeners(){
 
 async function renderBooks(){
     const books = await apiService.fetchBooks()
+    const sortedBooks = books.sort((a, b) => {
+        a = a.title.toLowerCase();
+        b = b.title.toLowerCase();
+        if (a < b){
+            return -1;
+        }else if (a > b){
+            return 1;
+        }else {
+            return 0;
+        }
+    })
     main.innerHTML = ""
-    books.map(book => {
+    sortedBooks.map(book => {
         const newBook = new Book(book)
         main.innerHTML += newBook.renderBook()
     })

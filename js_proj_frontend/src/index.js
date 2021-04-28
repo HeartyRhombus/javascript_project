@@ -38,7 +38,7 @@ function addClicksToLinks() {
     books.forEach(book => {
         book.addEventListener('click', showBook)
     })
-    let authors = document.querySelectorAll("li a.authors")
+    let authors = document.querySelectorAll("a.authors")
     authors.forEach(author => {
         author.addEventListener('click', showAuthor)
     })
@@ -53,6 +53,7 @@ async function showBook(e){
     document.getElementById('edit_book').addEventListener('click', editBookForm)
     document.getElementById('delete_book').addEventListener('click', deleteBook)
     addClicksToLinks()
+    // document.getElementById("${viewBook.author.id}")
 }
 
 async function showAuthor(e){

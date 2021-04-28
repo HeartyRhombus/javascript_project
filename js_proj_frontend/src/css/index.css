@@ -41,3 +41,7 @@ hr.divider {
     width: 50%;
     margin-left: 0px;
 }
+
+li {
+    list-style-type: "+ ";
+}

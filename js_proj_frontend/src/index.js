@@ -75,7 +75,6 @@ async function showBook(e){
     document.getElementById('edit_book').addEventListener('click', editBookForm)
     document.getElementById('delete_book').addEventListener('click', deleteBook)
     addClicksToLinks()
-    // document.getElementById("${viewBook.author.id}")
 }
 
 async function showAuthor(e){
@@ -90,9 +89,7 @@ async function showAuthor(e){
 async function createBookForm(){
     let formDiv = document.getElementById("new-book-form")
     let html = `
-    <button id="cancel_add_book">Cancel</button>
-    <br/> <br/>
-        Add A New Book
+        <b><u><i>Add A New Book</i></u></b>
         <form>
             <label>Title: </label>
             <input type="text" id="title"/>
@@ -116,7 +113,8 @@ async function createBookForm(){
             <br/>
             <input type="submit"/>
         </form>
-        <br/>
+        <button id="cancel_add_book">Cancel</button>
+        <hr/>
 
     `
     formDiv.innerHTML = html

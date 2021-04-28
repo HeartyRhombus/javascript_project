@@ -1,0 +1,23 @@
+body{
+    background-image: url("https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-superJumbo.jpg");
+    background-attachment: fixed;
+    background-position: center center;
+    font-family: Goudy Old Style, Garamond, Georgia, 'Times New Roman', Times, serif;
+}
+
+div#body{
+    background-color: rgba(222, 184, 135, .9);
+    padding: 10px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-family: Brush Script MT;
+}

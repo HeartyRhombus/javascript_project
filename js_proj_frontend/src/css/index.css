@@ -3,6 +3,7 @@ body{
     background-attachment: fixed;
     background-position: center center;
     font-family: Goudy Old Style, Garamond, Georgia, 'Times New Roman', Times, serif;
+    color: saddlebrown;
 }
 
 div#body{
@@ -10,7 +11,8 @@ div#body{
     padding: 10px;
 }
 
-a:link {
+a, a:link {
+    color: saddlebrown;
     text-decoration: none;
 }
 
@@ -18,6 +20,24 @@ a:hover {
     text-decoration: underline;
 }
 
-h1 {
+h1#title {
     font-family: Brush Script MT;
+    font-size: 50px;
+    text-align: center;
+    color: maroon;
+}
+
+hr {
+    border-width: 0px;
+    background-color: maroon;
+    height: 1px;
+}
+
+hr#navbar {
+    width: auto;
+}
+
+hr.divider {
+    width: 50%;
+    margin-left: 0px;
 }

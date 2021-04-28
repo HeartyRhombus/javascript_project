@@ -20,7 +20,10 @@ class Book{
     displayBook(){
         return `
         <h3>${this.title}</h3>
-        By: ${this.author.first_name} ${this.author.last_name}
+        By:
+            <a href="#" class="authors" data-id="${this.author.id}">
+                ${this.author.first_name} ${this.author.last_name}
+            </a>
         <hr>
         Publication Date: ${this.pub_date}
         <br/>

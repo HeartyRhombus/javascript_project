@@ -41,7 +41,7 @@ class Author{
         return `
         <h3>${this.first_name} ${this.last_name}</h3>
         Published: ${this.books.length} books in the library!
-        <hr>
+        <hr class="divider">
         Books:
         <ul>
             ${books}

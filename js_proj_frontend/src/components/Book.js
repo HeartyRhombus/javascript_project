@@ -24,7 +24,7 @@ class Book{
             <a href="#" class="authors" data-id="${this.author.id}">
                 ${this.author.first_name} ${this.author.last_name}
             </a>
-        <hr>
+        <hr class="divider">
         Publication Date: ${this.pub_date}
         <br/>
         Genre: ${this.genre}

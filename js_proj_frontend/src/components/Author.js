@@ -18,7 +18,19 @@ class Author{
     }
 
     displayAuthor(){
-        const books = this.books.map(book => {
+        const sortedBooks = this.books.sort((a, b) => {
+            a = a.title.toLowerCase();
+            b = b.title.toLowerCase();
+            if (a < b){
+                return -1;
+            }else if (a > b){
+                return 1;
+            }else {
+                return 0;
+            }
+        })
+
+        const books = sortedBooks.map(book => {
             return `
             <li>
                 <a href="#" class="books" data-id="${book.id}">${book.title}</a>

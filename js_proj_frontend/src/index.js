@@ -37,8 +37,9 @@ async function renderBooks(){
 async function renderAuthors(){
     const authors = await apiService.fetchAllAuthors()
     const sortedAuthors = authors.sort((a, b) => {
-        a = a.last_name.toLowerCase();
-        b = b.last_name.toLowerCase();
+        a.last_name === null ? a = a.last_name : a = a.last_name.toLowerCase()
+        b.last_name === null ? b = b.last_name : b = b.last_name.toLowerCase()
+        
         if (a < b){
             return -1;
         }else if (a > b){
@@ -48,7 +49,7 @@ async function renderAuthors(){
         }
     })
     main.innerHTML = ""
-    authors.map(author => {
+    sortedAuthors.map(author => {
         const newAuthor = new Author(author)
         main.innerHTML += newAuthor.renderAuthor()
     })
